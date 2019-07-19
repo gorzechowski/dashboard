@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="qt.js"></script>
+    <script type="text/javascript" src="qmlweb.parser.js"></script>
+
+    <script type="application/javascript">
+        document.addEventListener("DOMContentLoaded", (event) => {
+            const div = document.getElementsByName('body');
+            const engine = new QmlWeb.QMLEngine(div[0]);
+            const ipc = require('electron').ipcRenderer;
+            const hash = window.location.hash.replace('#', '');
+            const [ qml, index ] = hash.split(':');
+            const WebView = QmlWeb.getConstructor('QtWebView', '1.0', 'WebView');
+            const Item = QmlWeb.getConstructor('QtQuick', '2.0', 'Item');
+
+            QmlWeb.registerQmlType(class Dashboard_WebView extends WebView {
+                static versions = /^1\.0$/;
+                static properties = {
+                    canGoBack: "bool",
+                    canGoForward: "bool",
+                    loadProgress: "int",
+                    loading: "bool",
+                    title: "string",
+                    url: "url",
+                    refreshInterval: {
+                        type: "int",
+                        initialValue: 60
+                    },
+                };
+                static signals = {};
+                static intervalId = null;
+
+                constructor(meta) {
+                    super(meta);
+                    this.refreshIntervalChanged.connect(this, this.$onRefreshIntervalChanged);
+
+                    this.intervalId = setInterval(this.refreshSite, this.refreshInterval * 1000);
+
+                    ipc.on('refresh-disable', () => {
+                        ipc.send('log', { priority: 'debug', data: 'RefreshDisable in tab with index ' + index });
+                        clearInterval(this.intervalId);
+                    });
+
+                    ipc.on('refresh-enable', () => {
+                        ipc.send('log', { priority: 'debug', data: 'RefreshEnable in tab with index ' + index });
+                        this.intervalId = setInterval(this.refreshSite, this.refreshInterval * 1000);
+                    });
+                }
+
+                $onRefreshIntervalChanged(newValue) {
+                    this.refreshInterval = newValue;
+
+                    clearInterval(this.intervalId);
+
+                    this.intervalId = setInterval(this.refreshSite, this.refreshInterval * 1000);
+                }
+
+                refreshSite = () => {
+                    ipc.send('log', { priority: 'debug', data: 'RefreshWebTab in tab with index ' + index });
+
+                    this.impl.src = this.impl.src;
+                }
+            });
+
+            QmlWeb.registerQmlType(class Dashboard_SwitchableTab extends Item {
+                static versions = /^1\.0$/;
+                static properties = {
+                    switchAfter: "int",
+                };
+                static signals = {};
+                static timerId = null;
+
+                constructor(meta) {
+                    super(meta);
+                    this.switchAfterChanged.connect(this, this.$onSwitchAfterChanged);
+                }
+
+                $onSwitchAfterChanged(newValue) {
+                    this.switchAfter = newValue;
+
+                    ipc.send('register-tab', {
+                        switchAfter: this.switchAfter * 1000,
+                        index,
+                    });
+                }
+            });
+
+            try {
+                engine.loadQML(atob(qml));
+            } catch(error) {
+                window.alert(error.toString());
+            }
+
+            engine.start();
+        });
+    </script>
+</head>
+<body style="margin: 0; padding: 0">
+</body>
+</html>
