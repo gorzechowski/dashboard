@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/gorzechowski/dashboard.svg?branch=master)](https://travis-ci.org/gorzechowski/dashboard)
-
 # Dashboard
 
 ![Showcase](https://user-images.githubusercontent.com/4973929/61528919-4b450280-aa20-11e9-9c46-8897856bb8c3.gif)
