@@ -53,7 +53,7 @@ Run `npm run start`
 
 ## Roadmap
 
-See the [open issues](/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/gorzechowski/dashboard/issues) for a list of proposed features (and known issues).
 
 ## License
 
