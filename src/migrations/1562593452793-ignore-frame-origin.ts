@@ -9,7 +9,7 @@ export class IgnoreFrameOrigin1562593452793 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-        await queryRunner.query('DELETE FROM "settings" WHERE name = "ignore-frame-origin-policy"');
+        await queryRunner.query('DELETE FROM "setting" WHERE name = "ignore-frame-origin-policy"');
     }
 
 }

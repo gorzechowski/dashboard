@@ -55,7 +55,6 @@ SwitchableTab {\n\
 
 const SETTINGS_DISPLAY_NAMES = {
     'ignore-certificate-errors': 'Ignore certificate errors',
-    'ignore-frame-origin-policy': 'Ignore frame origin policy',
 };
 
 export default class App extends React.Component<AppProps, AppState> {

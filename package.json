@@ -1,7 +1,7 @@
 {
   "name": "dashboard",
   "description": "Compose all dashboards in one application using QML language",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/gorzechowski/dashboard",
   "license": "MIT",
   "author": {
@@ -40,7 +40,7 @@
     "better-queue": "^3.8.10",
     "electron": "^5.0.3",
     "electron-packager": "^14.0.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.15",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "reflect-metadata": "^0.1.13",
@@ -58,7 +58,7 @@
     "@types/lodash": "^4.14.134",
     "@types/react": "^16.8.22",
     "@types/winston": "^2.4.4",
-    "css-loader": "^0.28.9",
+    "css-loader": "^3.2.0",
     "electron-builder": "^20.44.4",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^2.30.1",
@@ -68,6 +68,6 @@
     "ts-loader": "^3.3.1",
     "tslint": "^5.17.0",
     "typescript": "^2.6.2",
-    "webpack": "^3.10.0"
+    "webpack": "^3.12.0"
   }
 }
