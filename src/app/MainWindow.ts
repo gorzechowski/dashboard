@@ -35,6 +35,7 @@ export default class MainWindow extends BrowserWindow {
             width: 1000,
             height: 750,
             title: appName(),
+            fullscreen: true,
             icon: `${__dirname}/../../assets/icon128x128.png`,
         });
 

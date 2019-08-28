@@ -3,7 +3,6 @@ import {
     app,
     ipcMain,
     BrowserView,
-    session,
     dialog,
 } from 'electron';
 import * as Queue from 'better-queue';
@@ -63,21 +62,6 @@ class Application {
             Logger.debug('Ignore certificate errors option DISABLED');
         }
 
-        const ignoreFrameOrigin = await this.settingRepository.findOne({ name: 'ignore-frame-origin-policy' });
-
-        if (ignoreFrameOrigin.value === '1') {
-            Logger.info('Ignore frame origin policy option ENABLED');
-            session.defaultSession.webRequest.onHeadersReceived({urls: []}, (details, callback) => {
-                if (details.responseHeaders['x-frame-options'] || details.responseHeaders['X-Frame-Options']) {
-                    delete details.responseHeaders['x-frame-options'];
-                    delete details.responseHeaders['X-Frame-Options'];
-                }
-                callback({cancel: false, responseHeaders: details.responseHeaders, statusLine: details.statusLine});
-            });
-        } else {
-            Logger.debug('Ignore frame origin policy option DISABLED');
-        }
-
         app.on('login', (event, webContents, request, authInfo, callback) => {
             event.preventDefault();
 
@@ -105,8 +89,6 @@ class Application {
 
     private show = () => {
         this.mainWindow = new MainWindow(this.onCommand);
-
-        this.mainWindow.setFullScreen(true);
 
         this.mainWindow.showInitialTab()
             .then(() => this.tabsRepository.find())
