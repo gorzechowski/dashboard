@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-#### **0.1.1** _(UNRELEASED)_
+#### **0.1.1** _(28.08.2019)_
 - Fix: switched to webview tag - iframe caused issue with cookies
 - Change: removed obsolete ignore frame origin policy setting
 
