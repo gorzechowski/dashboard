@@ -120,6 +120,7 @@ class Application {
                     const tab: BrowserView = new BrowserView({
                         webPreferences: {
                             nodeIntegration: true,
+                            webviewTag: true,
                         },
                     });
 
