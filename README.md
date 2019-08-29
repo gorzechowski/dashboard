@@ -4,6 +4,9 @@
 
 ## Description
 
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/gorzechowski/dashboard)
+[![Build Status](https://travis-ci.org/gorzechowski/dashboard.svg?branch=master)](https://travis-ci.org/gorzechowski/dashboard)
+
 ![Logo](https://user-images.githubusercontent.com/4973929/61528935-55ff9780-aa20-11e9-9e68-5ff1aa5979e3.png)
 
 Compose all dashboards in one application using QML language.
