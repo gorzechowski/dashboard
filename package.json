@@ -44,7 +44,7 @@
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^4.0.9",
     "styled-components": "^4.3.2",
-    "typeorm": "^0.2.18",
+    "typeorm": "^0.2.25",
     "winston": "^3.2.1"
   },
   "optionalDependencies": {
